@@ -1,0 +1,12 @@
+{
+    "name": "LGV-test-EW",
+    "private": true,
+    "version": "1.0.0",
+    "description": "LGV-test-EW desc",
+    "main": "server.js",
+    "dependencies": {
+	"octokit": "3.1.2"
+    },
+    "repository": "https://github.com/OWASP/NodejsGoat",
+    "license": "Apache 2.0"
+  }
