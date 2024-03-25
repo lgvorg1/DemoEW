@@ -69,6 +69,7 @@ jobs:
         run: |
           #cp package-lock.json.312 package-lock.json
 
+          ls -l 
           echo sed -i "s/3.1.2/$NEW_DEP_VERSION/g" ${GITHUB_WORKSPACE}/package-lock.json
           #cp ${GITHUB_WORKSPACE}/package-lock.json.312 ${GITHUB_WORKSPACE}/package-lock.json
           grep $NEW_DEP_VERSION ${GITHUB_WORKSPACE}/package-lock.json
