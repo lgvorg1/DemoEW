@@ -61,11 +61,6 @@ jobs:
       # Runs a set of commands using the runners shell 
       - name: Download Xygeni Scanner 
         run: |
-          grep "3.1.2" ${GITHUB_WORKSPACE}/package-lock.json.312
-          sed -i "s/3.1.2/$NEW_DEP_VERSION/g" ${GITHUB_WORKSPACE}/package-lock.json.312
-          grep "4.0.3" ${GITHUB_WORKSPACE}/package-lock.json.312
-          
-          exit 1
           echo Downloading Xygeni Scanner ....
           curl -L https://get.xygeni.io/latest/scanner/install.sh | /bin/bash -s -- -u $XY_USERNAME -p $XY_PASSWORD -s $XY_URL -d ${GITHUB_WORKSPACE}/scanner 
           
@@ -75,7 +70,6 @@ jobs:
           #cp package-lock.json.312 package-lock.json
 
           echo sed -i "s/3.1.2/$NEW_DEP_VERSION/g" ${GITHUB_WORKSPACE}/package-lock.json.312
-          echo sed -i 's/3.1.2/${NEW_DEP_VERSION}/g' ${GITHUB_WORKSPACE}/package-lock.json.312
           cp ${GITHUB_WORKSPACE}/package-lock.json.312 ${GITHUB_WORKSPACE}/package-lock.json
           
           echo Executing Xygeni scan ....    
