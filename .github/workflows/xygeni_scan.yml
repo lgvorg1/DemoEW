@@ -18,6 +18,7 @@ env:
   XY_PASSWORD: ${{ secrets.XY_PASSWORD_LABDEV }}
   XY_URL: ${{ secrets.XY_URL_LABDEV }}
   XY_PRJ_NAME: GitHub-${{ github.event.repository.name }}
+  PKG_NAME: octokit
   NEW_DEP_VERSION: 4.0.3
 
 
@@ -73,6 +74,16 @@ jobs:
       - name: Execution Xygeni Scanner (vuln)
         run: |
           echo Executing Xygeni scan ....    
-          ${GITHUB_WORKSPACE}/scanner/xygeni scan --fail-on=critical --run="suspectdeps" --no-conf-download -n ${{ env.XY_PRJ_NAME }} --dir ${GITHUB_WORKSPACE} -e **/scanner/** --skip-detectors=any=low
+          #${GITHUB_WORKSPACE}/scanner/xygeni scan --fail-on=critical --run="suspectdeps" --no-conf-download -n ${{ env.XY_PRJ_NAME }} --dir ${GITHUB_WORKSPACE} -e **/scanner/** --skip-detectors=any=low
+          retVal=$(${GITHUB_WORKSPACE}/scanner/xygeni scan --fail-on=critical --run="suspectdeps" --no-conf-download -n ${{ env.XY_PRJ_NAME }} --dir ${GITHUB_WORKSPACE} -e **/scanner/** --skip-detectors=any=low)
+          if [ $retVal -ne 0 ]; then
+            echo "======================================="
+            echo "Upgrade Dependency to version with detected Malware !!!! "
+            echo "Breaking pipeline !!!! "
+            echo " => Dep. Name:    $PKG_NAME"
+            echo " => Dep. Version: $PKG_VERSION"
+            echo "======================================="
+          fi
+          exit $retVal
         env:
           GITHUB_PAT: ${{ secrets.GH_PAT }}
