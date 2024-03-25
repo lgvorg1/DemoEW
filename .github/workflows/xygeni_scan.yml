@@ -62,7 +62,7 @@ jobs:
       - name: Download Xygeni Scanner 
         run: |
           grep "3.1.2" ${GITHUB_WORKSPACE}/package-lock.json.312
-          echo sed -i 's/3.1.2/$NEW_DEP_VERSION/g' ${GITHUB_WORKSPACE}/package-lock.json.312
+          sed -i "s/3.1.2/$NEW_DEP_VERSION/g" ${GITHUB_WORKSPACE}/package-lock.json.312
           grep "3.1.2" ${GITHUB_WORKSPACE}/package-lock.json.312
           grep "4.0.3" ${GITHUB_WORKSPACE}/package-lock.json.312
           
