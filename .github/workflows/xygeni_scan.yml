@@ -82,7 +82,7 @@ jobs:
             echo "Upgrade Dependency to version with detected Malware !!!! "
             echo "Breaking pipeline !!!! "
             echo " => Dep. Name:    $PKG_NAME"
-            echo " => Dep. Version: $PKG_VERSION"
+            echo " => Dep. Version: $NEW_DEP_VERSION"
             echo "======================================="
           fi
           exit $retVal
