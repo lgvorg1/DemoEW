@@ -79,13 +79,12 @@ jobs:
           retVal=$?
           if [ $retVal -ne 0 ]; then
             echo "======================================="
-            exit 1
             echo "Upgrade Dependency to version with detected Malware !!!! "
             echo "Breaking pipeline !!!! "
             echo " => Dep. Name:    $PKG_NAME"
             echo " => Dep. Version: $PKG_VERSION"
             echo "======================================="
-            exit 0
           fi
+          exit $retVal
         env:
           GITHUB_PAT: ${{ secrets.GH_PAT }}
