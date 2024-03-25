@@ -18,6 +18,7 @@ env:
   XY_PASSWORD: ${{ secrets.XY_PASSWORD_LABDEV }}
   XY_URL: ${{ secrets.XY_URL_LABDEV }}
   XY_PRJ_NAME: GitHub-${{ github.event.repository.name }}
+  NEW_DEP_VERSION: 4.0.3
 
 
 jobs:
@@ -69,7 +70,7 @@ jobs:
           #cp package-lock.json.312 package-lock.json
 
           sed -i 's/changeTypesToConsider: M/changeTypesToConsider: AM/g' ${GITHUB_WORKSPACE}/scanner/conf/codetampering/ccm/workflow_modification.yml
-          sed -i 's/3.1.2/4.0.3/g' ${GITHUB_WORKSPACE}/package-lock.json.312
+          sed -i 's/3.1.2/$NEW_DEP_VERSION/g' ${GITHUB_WORKSPACE}/package-lock.json.312
           cp ${GITHUB_WORKSPACE}/package-lock.json.312 ${GITHUB_WORKSPACE}/package-lock.json
           
           echo Executing Xygeni scan ....    
