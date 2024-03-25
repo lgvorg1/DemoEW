@@ -66,8 +66,16 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Execution Xygeni Scanner (vuln)
         run: |
-          #cp package-lock.json.312 package-lock.json
+          set +e
           echo Executing Xygeni scan ....    
-          ${GITHUB_WORKSPACE}/scanner/xygeni scan --fail-on=critical --run="inventory,misconf,deps,suspectdeps,malware" --no-conf-download -n ${{ env.XY_PRJ_NAME }} --dir ${GITHUB_WORKSPACE} -e **/scanner/** --skip-detectors=any=low
+          retVal=$(${GITHUB_WORKSPACE}/scanner/xygeni scan --fail-on=critical --run="inventory,misconf,deps,suspectdeps,malware" --no-conf-download -n ${{ env.XY_PRJ_NAME }} --dir ${GITHUB_WORKSPACE} -e **/scanner/** --skip-detectors=any=low)
+          if [ $retVal -ne 0 ]; then
+            echo "======================================="
+            echo "Malware detected !!!! "
+            echo " => Dep. Name:    $PKG_NAME"
+            echo " => Dep. Version: $PKG_VERSION"
+            echo "======================================="
+          fi
+          exit $retVal
         env:
           GITHUB_PAT: ${{ secrets.GH_PAT }}
