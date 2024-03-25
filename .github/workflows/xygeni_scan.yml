@@ -67,6 +67,6 @@ jobs:
       - name: Execution Xygeni Scanner (vuln)
         run: |
           echo Executing Xygeni scan ....    
-          ${GITHUB_WORKSPACE}/scanner/xygeni scan  --run="deps,suspectdeps,malware" --no-conf-download -n ${{ env.XY_PRJ_NAME }} --dir ${GITHUB_WORKSPACE} -e **/scanner/** --skip-detectors=any=low
+          ${GITHUB_WORKSPACE}/scanner/xygeni scan  --run="misconf,inventory,deps,suspectdeps,malware" --no-conf-download -n ${{ env.XY_PRJ_NAME }} --dir ${GITHUB_WORKSPACE} -e **/scanner/** --skip-detectors=any=low
         env:
           GITHUB_PAT: ${{ secrets.GH_PAT }}
