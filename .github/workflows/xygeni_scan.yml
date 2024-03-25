@@ -75,16 +75,16 @@ jobs:
         run: |
           set +e
           echo Executing Xygeni scan ....    
-          #${GITHUB_WORKSPACE}/scanner/xygeni scan --fail-on=critical --run="suspectdeps" --no-conf-download -n ${{ env.XY_PRJ_NAME }} --dir ${GITHUB_WORKSPACE} -e **/scanner/** --skip-detectors=any=low
           retVal=$(${GITHUB_WORKSPACE}/scanner/xygeni scan --fail-on=critical --run="suspectdeps" --no-conf-download -n ${{ env.XY_PRJ_NAME }} --dir ${GITHUB_WORKSPACE} -e **/scanner/** --skip-detectors=any=low)
           if [ $retVal -ne 0 ]; then
             echo "======================================="
+            exit 1
             echo "Upgrade Dependency to version with detected Malware !!!! "
             echo "Breaking pipeline !!!! "
             echo " => Dep. Name:    $PKG_NAME"
             echo " => Dep. Version: $PKG_VERSION"
             echo "======================================="
+            exit 0
           fi
-          exit $retVal
         env:
           GITHUB_PAT: ${{ secrets.GH_PAT }}
