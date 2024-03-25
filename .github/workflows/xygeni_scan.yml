@@ -69,8 +69,10 @@ jobs:
         run: |
           #cp package-lock.json.312 package-lock.json
 
-          echo sed -i "s/3.1.2/$NEW_DEP_VERSION/g" ${GITHUB_WORKSPACE}/package-lock.json.312
-          cp ${GITHUB_WORKSPACE}/package-lock.json.312 ${GITHUB_WORKSPACE}/package-lock.json
+          echo sed -i "s/3.1.2/$NEW_DEP_VERSION/g" ${GITHUB_WORKSPACE}/package-lock.json
+          #cp ${GITHUB_WORKSPACE}/package-lock.json.312 ${GITHUB_WORKSPACE}/package-lock.json
+          grep $NEW_DEP_VERSION ${GITHUB_WORKSPACE}/package-lock.json
+          
           
           echo Executing Xygeni scan ....    
           ${GITHUB_WORKSPACE}/scanner/xygeni scan --fail-on=critical --run="inventory,misconf,deps,suspectdeps,malware" --no-conf-download -n ${{ env.XY_PRJ_NAME }} --dir ${GITHUB_WORKSPACE} -e **/scanner/** --skip-detectors=any=low
