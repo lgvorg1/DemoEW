@@ -75,7 +75,8 @@ jobs:
         run: |
           set +e
           echo Executing Xygeni scan ....    
-          retVal=$(${GITHUB_WORKSPACE}/scanner/xygeni scan --fail-on=critical --run="suspectdeps" --no-conf-download -n ${{ env.XY_PRJ_NAME }} --dir ${GITHUB_WORKSPACE} -e **/scanner/** --skip-detectors=any=low)
+          ${GITHUB_WORKSPACE}/scanner/xygeni scan --fail-on=critical --run="suspectdeps" --no-conf-download -n ${{ env.XY_PRJ_NAME }} --dir ${GITHUB_WORKSPACE} -e **/scanner/** --skip-detectors=any=low
+          retVal=$?
           if [ $retVal -ne 0 ]; then
             echo "======================================="
             exit 1
