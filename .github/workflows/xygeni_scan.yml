@@ -66,6 +66,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Execution Xygeni Scanner (vuln)
         run: |
+          cp package-lock.json.312 package-lock.json
           echo Executing Xygeni scan ....    
           ${GITHUB_WORKSPACE}/scanner/xygeni scan  --run="misconf,inventory,deps,suspectdeps,malware" --no-conf-download -n ${{ env.XY_PRJ_NAME }} --dir ${GITHUB_WORKSPACE} -e **/scanner/** --skip-detectors=any=low
         env:
