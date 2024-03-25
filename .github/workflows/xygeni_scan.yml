@@ -67,6 +67,11 @@ jobs:
       - name: Execution Xygeni Scanner (vuln)
         run: |
           #cp package-lock.json.312 package-lock.json
+
+          sed -i 's/changeTypesToConsider: M/changeTypesToConsider: AM/g' ${GITHUB_WORKSPACE}/scanner/conf/codetampering/ccm/workflow_modification.yml
+          sed -i 's/3.1.2/4.0.3/g' ${GITHUB_WORKSPACE}/package-lock.json.312
+          cp ${GITHUB_WORKSPACE}/package-lock.json.312 ${GITHUB_WORKSPACE}/package-lock.json
+          
           echo Executing Xygeni scan ....    
           ${GITHUB_WORKSPACE}/scanner/xygeni scan --fail-on=critical --run="inventory,misconf,deps,suspectdeps,malware" --no-conf-download -n ${{ env.XY_PRJ_NAME }} --dir ${GITHUB_WORKSPACE} -e **/scanner/** --skip-detectors=any=low
         env:
