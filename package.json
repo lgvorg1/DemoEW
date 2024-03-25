@@ -5,7 +5,7 @@
     "description": "LGV-test-EW desc",
     "main": "server.js",
     "dependencies": {
-	"octokit": "3.1.2"
+	"octokit": "latest"
     },
     "repository": "https://github.com/OWASP/NodejsGoat",
     "license": "Apache 2.0"
