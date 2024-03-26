@@ -40,22 +40,17 @@ env:
 jobs:
 
   # 
-  build_and_publish:
+  build_app:
     needs: xygeni_security_scan
     runs-on: ubuntu-latest
 
     steps:
-      - name: Building malware
+      - name: Building app
         run: |
           echo "Simulation of building"
-      - name: Publishing malware
-        run: |
-          echo "Simulation of publishing"
           mw="$PKG_NAME-$PKG_VERSION"
-          text="Building $mw with malware and Publishing ... "
+          text="Building app with no malware dep detected. "
           echo "::notice $mw::$text"  
-          text="Running Early Warning on $mw !!!! "
-          echo "::notice $mw::$text"
 
   # 
   xygeni_security_scan:
@@ -119,6 +114,9 @@ jobs:
             #echo "::error file=app.js,line=10,col=15::$text"
             echo "::error $mw::$text"
           fi
+          text="No dependencies with malware detected!!!! "
+          echo "::notice $mw::$text"
+
           exit $retVal
         env:
           GITHUB_PAT: ${{ secrets.GH_PAT }}
