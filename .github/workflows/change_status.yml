@@ -7,15 +7,15 @@ on:
   # Allows you to run this workflow manually from the Actions tab sd
   workflow_dispatch:
     inputs:
-      dep_name:
+      dep-name:
         description: 'Dep. Name'
         required: true
         default: 'octokit'
-      dep_version:
+      dep-version:
         description: 'Dep. Version'
         required: true
         default: '3.1.2'  
-      dep_status:
+      dep-status:
         type: choice
         description: New Status
         options: 
@@ -51,9 +51,9 @@ jobs:
       - name: Cat event 
         run: |
           echo EVENT  ${{ github.event_name }}
-          echo INPUT_DEP_NAME $INPUT_DEP_NAME
-          echo INPUT_DEP_VERSION $INPUT_DEP_VERSION
-          echo INPUT_DEP_STATUS $INPUT_DEP_STATUS
+          echo INPUT_DEP-NAME $INPUT_DEP-NAME
+          echo INPUT_DEP-VERSION $INPUT_DEP-VERSION
+          echo INPUT_DEP-STATUS $INPUT_DEP-STATUS
           exit 1
           
 
