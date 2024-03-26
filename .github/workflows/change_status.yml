@@ -7,13 +7,12 @@ on:
   # Allows you to run this workflow manually from the Actions tab sd
   workflow_dispatch:
     inputs:
-      NewStatus:
-        description: 'New Status'     
-        required: true
-        default: 'warning'
-        options:
-          - uno
-          - dos
+      name:
+        type: choice
+        description: Who to greet
+        options: 
+        - monalisa
+        - cschleiden
 
 
 
