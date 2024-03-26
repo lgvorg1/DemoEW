@@ -38,8 +38,27 @@ env:
 
 
 jobs:
-  # This workflow contains a single job called "xygeni_security_scan"
-  build_with_safe_dep:
+
+  # 
+  build_and_publish:
+    needs: xygeni_security_scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Building malware
+        run: |
+          echo "Simulation of building"
+      - name: Publishing malware
+        run: |
+          echo "Simulation of publishing"
+          mw="$PKG_NAME-$PKG_VERSION"
+          text="Building $mw with malware and Publishing ... "
+          echo "::notice $mw::$text"  
+          text="Running Early Warning on $mw !!!! "
+          echo "::notice $mw::$text"
+
+  # 
+  xygeni_security_scan:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
