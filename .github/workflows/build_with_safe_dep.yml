@@ -88,10 +88,17 @@ jobs:
           retVal=$?
           if [ $retVal -ne 0 ]; then
             echo "======================================="
-            echo "Malware detected !!!! "
+            echo "Detected usage of Dep with Malware !!!! "
             echo " => Dep. Name:    $PKG_NAME"
             echo " => Dep. Version: $PKG_VERSION"
+            echo "Breaking the build to avoid malware !!!! "
             echo "======================================="
+            text="Detected usage of Dependency ($mw) with Malware !!!! "
+            #echo "::error file=app.js,line=10,col=15::$text"
+            echo "::error $mw::$text"
+            text="Breaking the build to avoid malware infection !!!! "
+            #echo "::error file=app.js,line=10,col=15::$text"
+            echo "::error $mw::$text"
           fi
           exit $retVal
         env:
