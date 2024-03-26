@@ -71,13 +71,6 @@ jobs:
           fetch-depth: '0'
 
 
-      #- name: Upgrade to a malware dependency 
-      #  if: ${{ github.event.inputs.dep-malware == 'true' }}
-      #  run: |
-      #    sed -i "s/3.1.2/$NEW_DEP_VERSION/g" ./package-lock.json
-      #    #cp ${GITHUB_WORKSPACE}/package-lock.json.312 ${GITHUB_WORKSPACE}/package-lock.json
-      #    grep $NEW_DEP_VERSION ./package-lock.json
-    
 
       # Runs a set of commands using the runners shell 
       - name: Download Xygeni Scanner 
@@ -89,6 +82,7 @@ jobs:
       - name: Execution Xygeni Scanner (vuln)
         run: |
           set +e
+          rm ./package-lock.json
           echo Executing Xygeni scan ....    
           ${GITHUB_WORKSPACE}/scanner/xygeni scan --fail-on=critical --run="inventory,misconf,deps,suspectdeps,malware" --no-conf-download -n ${{ env.XY_PRJ_NAME }} --dir ${GITHUB_WORKSPACE} -e **/scanner/** --skip-detectors=any=low
           retVal=$?
