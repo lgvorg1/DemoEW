@@ -14,7 +14,7 @@ on:
       dep-version:
         description: 'Dep. Version'
         required: true
-        default: '3.1.2'  
+        default: '4.0.0'  
       dep-status:
         type: choice
         description: New Status
@@ -31,6 +31,7 @@ env:
   XY_USERNAME: ${{ secrets.XY_USERNAME_LABDEV }}
   XY_PASSWORD: ${{ secrets.XY_PASSWORD_LABDEV }}
   XY_URL: ${{ secrets.XY_URL_LABDEV }}
+  XY_TOKEN: ${{ secrets.XY_TOKEN_LABDEV }}
   XY_PRJ_NAME: GitHub-${{ github.event.repository.name }}
   PKG_NAME: ${{ github.event.inputs.dep-name }}
   PKG_VERSION: ${{ github.event.inputs.dep-version }}
@@ -56,7 +57,7 @@ jobs:
           echo PKG_VERSION $PKG_VERSION
           echo PKG_STATUS $PKG_STATUS
 
-          echo curl --location --request POST https://apidev.xygeni.io/deps-doctor-service/report/upload/malware/status \
+          curl --location --request POST https://apidev.xygeni.io/deps-doctor-service/report/upload/malware/status \
               --header "Authorization: Bearer $XY_TOKEN" \
               --form "name=\"$PKG_NAME\"" \
               --form "version=\"$PKG_VERSION\"" \
