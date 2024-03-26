@@ -32,31 +32,39 @@ env:
   XY_PASSWORD: ${{ secrets.XY_PASSWORD_LABDEV }}
   XY_URL: ${{ secrets.XY_URL_LABDEV }}
   XY_PRJ_NAME: GitHub-${{ github.event.repository.name }}
-  DEP_NAME: ${{ github.event.inputs.dep-name }}
-  DEP_VERSION: ${{ github.event.inputs.dep-version }}
-  DEP_STATUS: ${{ github.event.inputs.dep-status }}
+  PKG_NAME: ${{ github.event.inputs.dep-name }}
+  PKG_VERSION: ${{ github.event.inputs.dep-version }}
+  PKG_STATUS: ${{ github.event.inputs.dep-status }}
+  DEF_LANGUAGE: "javascript"
 
 
 
 
 jobs:
   # This workflow contains a single job called "xygeni_security_scan"
-  xygeni_cicd_scan:
+  change_status:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    # ref: "refs/pull/${{ github.event.number }}/merge"
-    # ref: ${{ github.event.pull_request.head.sha }}
-  
+ 
     steps:
 
       - name: Cat event 
         run: |
           echo EVENT  ${{ github.event_name }}
-          echo DEP_NAME $DEP_NAME
-          echo DEP_VERSION $DEP_VERSION
-          echo DEP_STATUS $DEP_STATUS
+          echo PKG_NAME $PKG_NAME
+          echo PKG_VERSION $PKG_VERSION
+          echo PKG_STATUS $PKG_STATUS
+
+          echo curl --location --request POST https://apidev.xygeni.io/deps-doctor-service/report/upload/malware/status \
+              --header "Authorization: Bearer $XY_TOKEN" \
+              --form "name=\"$PKG_NAME\"" \
+              --form "version=\"$PKG_VERSION\"" \
+              --form "language=\"$DEF_LANGUAGE\"" \
+              --form "status=\"$PKG_STATUS\""
+
+
+
           exit 1
           
 
