@@ -32,6 +32,9 @@ env:
   XY_PASSWORD: ${{ secrets.XY_PASSWORD_LABDEV }}
   XY_URL: ${{ secrets.XY_URL_LABDEV }}
   XY_PRJ_NAME: GitHub-${{ github.event.repository.name }}
+  DEP_NAME: ${{ github.event.inputs.dep-name }}
+  DEP_VERSION: ${{ github.event.inputs.dep-version }}
+  DEP_STATUS: ${{ github.event.inputs.dep-status }}
 
 
 
@@ -51,9 +54,9 @@ jobs:
       - name: Cat event 
         run: |
           echo EVENT  ${{ github.event_name }}
-          echo INPUT_DEP-NAME ${{ github.event.inputs.dep-name }}
-          echo INPUT_DEP-VERSION $INPUT_DEP-VERSION
-          echo INPUT_DEP-STATUS $INPUT_DEP-STATUS
+          echo DEP_NAME $DEP_NAME
+          echo DEP_VERSION $DEP_VERSION
+          echo DEP_STATUS $DEP_STATUS
           exit 1
           
 
