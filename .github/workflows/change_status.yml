@@ -50,13 +50,8 @@ jobs:
  
     steps:
 
-      - name: Cat event 
+      - name: Change Status 
         run: |
-          echo EVENT  ${{ github.event_name }}
-          echo PKG_NAME $PKG_NAME
-          echo PKG_VERSION $PKG_VERSION
-          echo PKG_STATUS $PKG_STATUS
-
           curl --location --request POST https://apidev.xygeni.io/deps-doctor-service/report/upload/malware/status \
               --header "Authorization: Bearer $XY_TOKEN" \
               --form "name=\"$PKG_NAME\"" \
