@@ -52,7 +52,7 @@ jobs:
 
       - name: Change Status 
         run: |
-          curl --location --request POST https://apidev.xygeni.io/deps-doctor-service/report/upload/malware/status \
+          curl --location --request POST $XY_URL/report/upload/malware/status \
               --header "Authorization: Bearer $XY_TOKEN" \
               --form "name=\"$PKG_NAME\"" \
               --form "version=\"$PKG_VERSION\"" \
