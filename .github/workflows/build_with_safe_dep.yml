@@ -98,7 +98,7 @@ jobs:
           set +e
           rm ./package-lock.json
           echo Executing Xygeni scan ....    
-          ${GITHUB_WORKSPACE}/scanner/xygeni scan --fail-on=critical --run="inventory,misconf,deps" --no-conf-download -n ${{ env.XY_PRJ_NAME }} --dir ${GITHUB_WORKSPACE} -e **/scanner/** --skip-detectors=any=low
+          ${GITHUB_WORKSPACE}/scanner/xygeni scan --fail-on=critical --run="inventory,misconf,deps,suspectdeps" --no-conf-download -n ${{ env.XY_PRJ_NAME }} --dir ${GITHUB_WORKSPACE} -e **/scanner/** --skip-detectors=any=low
           retVal=$?
           if [ $retVal -ne 0 ]; then
             echo "======================================="
