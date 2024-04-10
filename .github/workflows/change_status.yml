@@ -14,7 +14,7 @@ on:
       dep-version:
         description: 'Dep. Version'
         required: true
-        default: '4.0.0'  
+        default: '5.1.4'  
       dep-status:
         type: choice
         description: New Status
