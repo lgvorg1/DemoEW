@@ -24,7 +24,8 @@ on:
       dep-version:
         description: 'Dep. Version'
         required: true
-        default: '3.2.0'
+        default: 'latest'
+        #default: '3.2.0'
  
 env:
   XY_USERNAME: ${{ secrets.XY_USERNAME_DEMO }}
