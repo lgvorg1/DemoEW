@@ -1,7 +1,7 @@
 on
      any
    when
-     severity = critical
+     severity = high
    then
       print_all:@print("--------metadata:" + metadata),
       print_all:@print("--------metadata.scm:" + metadata.scm),
