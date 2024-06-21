@@ -4,5 +4,5 @@ on
      severity = critical
    then
       print_all:@print("deps critical:" + @count($)),
-      @print($)
+      print_all:@print($),
       @exitcode(167)
