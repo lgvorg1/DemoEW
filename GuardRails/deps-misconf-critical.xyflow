@@ -1,5 +1,5 @@
 on
-     deps,misconf
+     deps,misconf,suspectdeps
    when
      severity = critical
    then
