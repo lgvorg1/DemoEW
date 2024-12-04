@@ -19,9 +19,9 @@ on:
         type: choice
         description: New Status
         options: 
+        - safe
         - confirmed_by_xygeni
         - confirmed_malware
-        - safe
 
 
 
